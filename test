@@ -1,1 +1,47 @@
 #!/bin/bash
+
+# set reporter option as arg1 or default to 'surefire'
+REPORTER=( "${1:-surefire}" )
+echo "Running tests with reporter: $REPORTER"
+
+# If arg1 is not provided, or it is 'surefire', run the Surefire report.
+if [ $REPORTER == "surefire" ]; then
+  # Run Maven build and tests
+  # Run the tests (clean + test phases).
+  # Generate the Surefire test reports in HTML format.
+  # Generate a full Maven site with documentation in target/site/.
+  mvn clean verify site -o
+  if [ $? -eq 0 ]; then
+      echo "Build and tests successful. Opening report..."
+      
+      # Open the Surefire report (adjust this path for the report you need)
+      if [ -f target/site/surefire-report.html ]; then
+          xdg-open target/site/surefire-report.html   # For Linux
+          # open target/site/surefire-report.html     # For macOS
+          # start target/site/surefire-report.html    # For Windows (in Git Bash)
+      fi
+  else
+      echo "Build failed. Not opening report."
+  fi
+fi
+
+# If arg1 is 'allure', run the Allure report.
+
+if [ $REPORTER == "allure" ]; then
+  # Run Maven build and tests
+  # Run the tests (clean + test phases).
+  # Generate the Allure report.
+  mvn clean test allure:report
+  if [ $? -eq 0 ]; then
+      echo "Build and tests successful. Opening report..."
+      
+      # Optionally, open the Allure report
+      if [ -f target/site/allure-maven-plugin/allure-maven.html ]; then
+          xdg-open target/site/allure-maven-plugin/allure-maven.html   # For Linux
+          # open target/site/allure-maven/index.html     # For macOS
+          # start target/site/allure-maven/index.html    # For Windows (in Git Bash)
+      fi
+  else
+      echo "Build failed. Not opening report."
+  fi
+fi
