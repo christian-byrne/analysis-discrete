@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Check if the user provided a filename
+if [ -z "$1" ]; then
+  echo "Usage: $0 <filename>"
+  exit 1
+fi
+
+# Get the filename from the first argument
+FILENAME="$1"
+
+# If the filename doesn't end with .java, append .java
+if [[ "$FILENAME" != *.java ]]; then
+  FILENAME="${FILENAME}.java"
+fi
+
+# Search for the first match of the file in the current directory and subdirectories
+FILEPATH=$(find . -name "$FILENAME" | head -n 1)
+
+# Check if the file was found
+if [ -z "$FILEPATH" ]; then
+  echo "Error: File '$FILENAME' not found."
+  exit 1
+fi
+
+# Echo the full path of the found file
+echo "Found: $FILEPATH"
+
+# Get the directory and base filename
+DIR=$(dirname "$FILEPATH")
+BASENAME=$(basename "$FILEPATH" .java)
+
+# Change to the project root directory (assuming the script is run from the root)
+cd "$(git rev-parse --show-toplevel || echo ".")"
+
+# Derive the package name from the directory structure (remove src/main/java/ if present)
+PACKAGE=$(echo "$DIR" | sed 's|^\./src/main/java/||' | sed 's|/|.|g')
+
+# Check if PACKAGE is empty (no package)
+if [ -z "$PACKAGE" ]; then
+  FULLCLASS="$BASENAME"  # No package, just the class name
+else
+  FULLCLASS="$PACKAGE.$BASENAME"  # Package + class name
+fi
+
+# Output the fully qualified class name
+echo "Running: $FULLCLASS"
+
+# Run Maven to compile and execute the class
+mvn compile exec:java -Dexec.mainClass="$FULLCLASS" -e
