@@ -50,4 +50,4 @@ FULLCLASS=$(echo "$FULLCLASS" | sed 's/^\.*//')
 echo "Running: $FULLCLASS"
 
 # Run Maven to compile and execute the class, passing arguments correctly
-mvn compile exec:java -Dexec.mainClass="$FULLCLASS" "${@:2}"
+mvn compile exec:java -Dexec.mainClass="$FULLCLASS" -Dexec.args="${@:2}"
