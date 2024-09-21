@@ -33,18 +33,21 @@ BASENAME=$(basename "$FILEPATH" .java)
 # Change to the project root directory (assuming the script is run from the root)
 cd "$(git rev-parse --show-toplevel || echo ".")"
 
-# Derive the package name from the directory structure (remove src/main/java/ if present)
+# Remove './src/main/java/' from the directory path to get the package structure
 PACKAGE=$(echo "$DIR" | sed 's|^\./src/main/java/||' | sed 's|/|.|g')
 
 # Check if PACKAGE is empty (no package)
-if [ -z "$PACKAGE" ]; then
+if [ -z "$PACKAGE" ] || [ "$PACKAGE" = "$DIR" ]; then
   FULLCLASS="$BASENAME"  # No package, just the class name
 else
   FULLCLASS="$PACKAGE.$BASENAME"  # Package + class name
 fi
 
+# Ensure there are no leading dots in the FULLCLASS
+FULLCLASS=$(echo "$FULLCLASS" | sed 's/^\.*//')
+
 # Output the fully qualified class name
 echo "Running: $FULLCLASS"
 
-# Run Maven to compile and execute the class
-mvn compile exec:java -Dexec.mainClass="$FULLCLASS" -e
+# Run Maven to compile and execute the class, passing arguments correctly
+mvn compile exec:java -Dexec.mainClass="$FULLCLASS" "${@:2}"
