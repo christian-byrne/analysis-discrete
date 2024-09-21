@@ -17,9 +17,9 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>8</source>  <!-- You can set this to 11 or 17 if you're using a later version of
+          <source>11</source>  <!-- You can set this to 11 or 17 if you're using a later version of
           Java -->
-          <target>8</target>  <!-- You can set this to 11 or 17 if you're using a later version of
+          <target>11</target>  <!-- You can set this to 11 or 17 if you're using a later version of
           Java -->
         </configuration>
       </plugin>
@@ -28,10 +28,66 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.2</version>
       </plugin>
+
+      <!-- Add Allure plugin for test reporting -->
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.10.0</version>
+    <configuration>
+        <resultsDirectory>${project.build.directory}/target/allure-results</resultsDirectory> <!-- Ensures results go to target/allure-results -->
+    </configuration>
+        <!-- Automatically generate Allure report after test phase -->
+        <executions>
+          <execution>
+            <id>generate-allure-report</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Add Surefire report plugin for generating test reports -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.22.2</version>
+        <!-- Automatically generate Surefire report after test phase -->
+        <executions>
+          <execution>
+            <id>generate-surefire-report</id>
+            <phase>site</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Add Maven Site plugin for generating project site -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.9.1</version>
+        <!-- Automatically generate project site after test phase -->
+        <executions>
+          <execution>
+            <id>generate-site</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>site</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 
   <dependencies>
+    <!-- Add JUnit 5 for unit testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -43,6 +99,12 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.7.0</version>
       <scope>test</scope>
+    </dependency>
+    <!-- Add Allure for rich test reporting -->
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-junit5</artifactId> <!-- or allure-junit4 if using JUnit 4 -->
+      <version>2.13.8</version>
     </dependency>
   </dependencies>
 </project>
