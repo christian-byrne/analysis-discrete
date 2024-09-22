@@ -1,10 +1,7 @@
-
-package src.main;
-
 import java.io.File;
 import java.util.Scanner;
 
-class VICData {
+public class VICData {
   public String agentID;
   public String date;
   public String phrase;
@@ -48,45 +45,43 @@ class VICData {
    |  Returns:  A reference to an object of class VICData that contains
    |            the five pieces of data.
    *-------------------------------------------------------------------*/
-
-  public static VICData readVICData(String pathName) {
+  public static VICData readVICData(String pathName, boolean encrypt) {
     VICData vic = new VICData(); // Object to hold the VIC input data
     Scanner inFile = null; // Scanner file object reference
 
     try {
       inFile = new Scanner(new File(pathName));
-    } catch (Exception e) {
+    } catch (Exception ex) {
       System.out.println("File does not exist: " + pathName + "!\n");
       System.exit(1);
     }
 
-    // Read and sanity-check agent ID. Needs to be ID_LEN long
-    // and numeric.
+    // If encrypt is true, parse agentID
+    if (encrypt) {
+      // Read and sanity-check agent ID. Needs to be ID_LEN long and numeric.
+      if (inFile.hasNext()) {
+        vic.agentID = inFile.nextLine();
+      } else {
+        System.out.println("ERROR:  Agent ID not found!\n");
+        System.exit(1);
+      }
 
-    if (inFile.hasNext()) {
-      vic.agentID = inFile.nextLine();
-    } else {
-      System.out.println("ERROR:  Agent ID not found!\n");
-      System.exit(1);
+      if (vic.agentID.length() != ID_LEN) {
+        System.out.printf("ERROR:  Agent ID length is %d, must be %d!\n",
+            vic.agentID.length(), ID_LEN);
+        System.exit(1);
+      }
+
+      try {
+        long idValue = Long.parseLong(vic.agentID);
+      } catch (NumberFormatException ex) {
+        System.out.println("Agent ID `" + vic.agentID
+            + " contains non-numeric characters!\n");
+        System.exit(1);
+      }
     }
 
-    if (vic.agentID.length() != ID_LEN) {
-      System.out.printf("ERROR:  Agent ID length is %d, must be %d!\n",
-          vic.agentID.length(), ID_LEN);
-      System.exit(1);
-    }
-
-    try {
-      long idValue = Long.parseLong(vic.agentID);
-    } catch (NumberFormatException e) {
-      System.out.println("Agent ID `" + vic.agentID
-          + "contains non-numeric characters!\n");
-      System.exit(1);
-    }
-
-    // Read and sanity-check date. Needs to be DATE_LEN long
-    // and numeric.
-
+    // Read and sanity-check date. Needs to be DATE_LEN long and numeric.
     if (inFile.hasNext()) {
       vic.date = inFile.nextLine();
     } else {
@@ -102,15 +97,14 @@ class VICData {
 
     try {
       long dateValue = Long.parseLong(vic.date);
-    } catch (NumberFormatException e) {
+    } catch (NumberFormatException ex) {
       System.out.println("Date `" + vic.date
-          + "contains non-numeric characters!\n");
+          + " contains non-numeric characters!\n");
       System.exit(1);
     }
 
-    // Read and sanity-check phrase. After removing non-letters,
-    // at least PHRASE_LEN letters must remain.
-
+    // Read and sanity-check phrase. After removing non-letters, at least PHRASE_LEN
+    // letters must remain.
     if (inFile.hasNext()) {
       vic.phraseOriginal = inFile.nextLine();
       StringBuffer sb = new StringBuffer(vic.phraseOriginal);
@@ -130,15 +124,13 @@ class VICData {
     }
 
     if (vic.phrase.length() != PHRASE_LEN) {
-      System.out.printf("ERROR:  Phrase contains %d letter(s), "
-          + "must have at least %d!\n",
+      System.out.printf("ERROR:  Phrase contains %d letter(s), must have at least %d!\n",
           vic.phrase.length(), PHRASE_LEN);
       System.exit(1);
     }
 
-    // Read and sanity-check anagram. Must be ANAGRAM_LEN long,
-    // and contain ANAGRAM_LETTERS letters and the rest spaces.
-
+    // Read and sanity-check anagram. Must be ANAGRAM_LEN long, and contain
+    // ANAGRAM_LETTERS letters and the rest spaces.
     if (inFile.hasNext()) {
       vic.anagram = inFile.nextLine().toUpperCase();
     } else {
@@ -153,10 +145,8 @@ class VICData {
     }
 
     for (int i = 0; i < vic.anagram.length(); i++) {
-      if (!Character.isLetter(vic.anagram.charAt(i))
-          && vic.anagram.charAt(i) != SPACE) {
-        System.out.printf("ERROR:  Anagram contains character `%c'.\n",
-            vic.anagram.charAt(i));
+      if (!Character.isLetter(vic.anagram.charAt(i)) && vic.anagram.charAt(i) != SPACE) {
+        System.out.printf("ERROR:  Anagram contains character `%c'.\n", vic.anagram.charAt(i));
         System.exit(1);
       }
     }
@@ -168,21 +158,18 @@ class VICData {
       }
     }
     if (numLetters != ANAGRAM_LETTERS) {
-      System.out.printf("ERROR:  Anagram contains %d letters, "
-          + "should have %d plus %d spaces.\n",
-          numLetters, ANAGRAM_LETTERS,
-          ANAGRAM_LEN - ANAGRAM_LETTERS);
+      System.out.printf("ERROR:  Anagram contains %d letters, should have %d plus %d spaces.\n",
+          numLetters, ANAGRAM_LETTERS, ANAGRAM_LEN - ANAGRAM_LETTERS);
       System.exit(1);
     }
 
-    // Read and sanity-check message. After removing non-letters
-    // and capitalizing, at least one letter must remain.
-
+    // Read and sanity-check message. After removing non-letters and capitalizing,
+    // at least one letter must remain.
     if (inFile.hasNext()) {
       vic.messageOriginal = inFile.nextLine();
       StringBuffer sb = new StringBuffer(vic.messageOriginal);
       for (int i = 0; i < sb.length(); i++) {
-        if (!Character.isLetter(sb.charAt(i))) {
+        if (encrypt && !Character.isLetter(sb.charAt(i))) {
           sb.deleteCharAt(i);
           i--; // Don't advance to next index o.w. we miss a char
         }
@@ -199,7 +186,9 @@ class VICData {
     }
 
     if (DEBUG) {
-      System.out.printf("vic.agentID = %s\n", vic.agentID);
+      if (encrypt) {
+        System.out.printf("vic.agentID = %s\n", vic.agentID);
+      }
       System.out.printf("vic.date = %s\n", vic.date);
       System.out.printf("vic.phrase = %s\n", vic.phrase);
       System.out.printf("vic.anagram = %s\n", vic.anagram);

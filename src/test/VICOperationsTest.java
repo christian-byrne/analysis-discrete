@@ -1,11 +1,9 @@
-package src.test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
-import src.main.VICOperations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -138,7 +136,6 @@ public class VICOperationsTest {
     }
   }
 
-  // JUnit 5 test case to invoke the helper function
   @Test
   public void testRandomShufflings100Times() {
     testRandomShufflings(vic);

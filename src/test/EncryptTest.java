@@ -1,11 +1,8 @@
-package src.test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
-import src.main.EncryptVIC;
-import src.main.VICOperations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

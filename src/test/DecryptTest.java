@@ -1,11 +1,6 @@
-package src.test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
-import src.main.DecryptVIC;
-import src.main.VICOperations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,12 +17,10 @@ public class DecryptTest {
 
     try {
       // Call the main method
-      // MyApp.main(new String[]{});
-      // EncryptVIC.main(new String[] { "src/test/data/test_01.txt" });
-      DecryptVIC.main(new String[] { "src/test/data/test_03.txt" });
+      DecryptVIC.main(new String[] { "src/test/data/test_05.txt" });
 
       // Check the captured output
-      String expectedOutput = "RUNAWAY";
+      String expectedOutput = "IAMAROBOT";
 
       assertEquals(expectedOutput.trim(), outputStream.toString().trim());
     } finally {
@@ -47,6 +40,28 @@ public class DecryptTest {
       // Call the main method
       // MyApp.main(new String[]{});
       DecryptVIC.main(new String[] { "src/test/data/test_04.txt" });
+
+      // Check the captured output
+      String expectedOutput = "RUNAWAY";
+
+      assertEquals(expectedOutput.trim(), outputStream.toString().trim());
+    } finally {
+      // Restore the original System.out
+      System.setOut(originalOut);
+    }
+
+  }
+
+  @Test
+  public void testMainOutput3() {
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out; // Save the original System.out
+    System.setOut(new PrintStream(outputStream));
+
+    try {
+      // Call the main method
+      // MyApp.main(new String[]{});
+      DecryptVIC.main(new String[] { "src/test/data/test_06.txt" });
 
       // Check the captured output
       String expectedOutput = "SENDMONEY";
