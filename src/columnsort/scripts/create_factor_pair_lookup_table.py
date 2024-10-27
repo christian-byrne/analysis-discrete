@@ -24,7 +24,7 @@ def find_factors_pairs(n):
     return result
 
 
-TOTAL = 8192
+TOTAL = 65536
 x = find_factors_pairs(TOTAL)
 
 final = {

@@ -20,7 +20,7 @@ public class Prog3 {
   private static int COLS;
   private static int SIZE;
   private static int OVERFLOW;
-  private boolean DEBUG = false;
+  private static boolean DEBUG = false;
   private static int[][] LOOKUP_TABLE;
 
   public static void main(String[] args) {
@@ -38,7 +38,6 @@ public class Prog3 {
     Prog3 prog3 = new Prog3();
 
     SIZE = arr.length;
-    System.out.println("Size of input: " + SIZE);
 
     if (SIZE >= LOOKUP_TABLE.length) {
       ROWS = LOOKUP_TABLE[LOOKUP_TABLE.length - 1][0];
@@ -49,7 +48,10 @@ public class Prog3 {
       COLS = LOOKUP_TABLE[SIZE][1];
       OVERFLOW = LOOKUP_TABLE[SIZE][2];
     }
-    System.out.println("ROWS: " + ROWS + ", COLS: " + COLS + ", OVERFLOW: " + OVERFLOW);
+    if (DEBUG) {
+      System.out.println("Size of input: " + SIZE);
+      System.out.println("ROWS: " + ROWS + ", COLS: " + COLS + ", OVERFLOW: " + OVERFLOW);
+    }
 
     System.gc();
     long startTime = System.nanoTime();
@@ -65,7 +67,7 @@ public class Prog3 {
     }
 
     for (int i = 0; i < sortedList.size(); i++) {
-      // System.out.println(sortedList.get(i));
+      System.out.println(sortedList.get(i));
     }
     System.out.println("Elapsed time = " + (endTime - startTime) / 1000000000.0 + " seconds.");
   }
@@ -364,10 +366,6 @@ public class Prog3 {
     for (int i = 0; i < shift; i++) {
       matrix.get(0).popRight();
     }
-
-    // TODO: maybe it's more efficient to not remove an item from the matrix, but
-    // rather just skip this col in the final output step?
-    matrix.remove(originalColCt - 1);
   }
 
   ArrayList<Integer> columnsort(int[] arr) {
@@ -383,46 +381,46 @@ public class Prog3 {
       }
       matrix.add(col);
     }
-    System.out.println("Step 0: Creating matrix:");
+    // System.out.println("Step 0: Creating matrix:");
     prettyPrintMatrix(matrix);
 
     // Step 1: Sort Columns
-    System.out.println("Step 1: Sorting columns:");
+    // System.out.println("Step 1: Sorting columns:");
     sortColumns(matrix);
     prettyPrintMatrix(matrix);
 
     // Step 2: Transpose and Reshape
-    System.out.println("Step 2: Transpose and Reshape");
+    // System.out.println("Step 2: Transpose and Reshape");
     transposeAndReshape(matrix);
     prettyPrintMatrix(matrix);
 
     // Step 3: Sort columns
-    System.out.println("Step 3: Sorting columns:");
+    // System.out.println("Step 3: Sorting columns:");
     sortColumns(matrix);
     prettyPrintMatrix(matrix);
 
     // Step 4: Reshape and Transpose
-    System.out.println("Step 4: Reshape and Transpose");
+    // System.out.println("Step 4: Reshape and Transpose");
     reshapeAndTranspose(matrix);
     prettyPrintMatrix(matrix);
 
     // Step 5: Sort columns
-    System.out.println("Step 5: Sorting columns:");
+    // System.out.println("Step 5: Sorting columns:");
     sortColumns(matrix);
     prettyPrintMatrix(matrix);
 
     // Step 6: Shift down by r/2
-    System.out.println("Step 6: Shift down by r/2");
+    // System.out.println("Step 6: Shift down by r/2");
     shiftDownHalfR(matrix);
     prettyPrintMatrix(matrix);
 
     // Step 7: Sort columns
-    System.out.println("Step 7: Sorting columns:");
+    // System.out.println("Step 7: Sorting columns:");
     sortColumns(matrix);
     prettyPrintMatrix(matrix);
 
     // Step 8: Shift up by r/2
-    System.out.println("Step 8: Shift up by r/2");
+    // System.out.println("Step 8: Shift up by r/2");
     shiftUpHalfR(matrix);
     prettyPrintMatrix(matrix);
 
@@ -431,9 +429,11 @@ public class Prog3 {
 
     ArrayList<Integer> output = new ArrayList<>();
     int curOverflowIdx = SIZE - OVERFLOW;
-    int curOverflowVal = arr[curOverflowIdx];
+    int curOverflowVal = curOverflowIdx < SIZE ? arr[curOverflowIdx] : Integer.MAX_VALUE;
 
-    int curColIndex = matrix.size() - 1;
+    // The last column contains the negative infinity values, so we start from the
+    // second-to-last column
+    int curColIndex = matrix.size() - 2;
     int curColVal = curColIndex >= 0 ? matrix.get(curColIndex).popLeft().value : Integer.MAX_VALUE;
 
     for (int i = 0; i < SIZE; i++) {
