@@ -1,5 +1,5 @@
-
 import itertools
+import struct
 
 def find_factors_pairs(n):
     result = {}
@@ -24,7 +24,7 @@ def find_factors_pairs(n):
     return result
 
 
-TOTAL = 500
+TOTAL = 8192
 x = find_factors_pairs(TOTAL)
 
 final = {
@@ -52,9 +52,18 @@ def find_closest_key(num, pairs):
 for i in range(1, TOTAL):
     find_closest_key(i, x)
 
+assert len(final) == TOTAL
+assert all(v >= 0 for _, _, v in final.values())
+assert all(v <= TOTAL/2 and v2 <= TOTAL/2 for v, v2, _ in final.values())
 
-# Format and print in a way that can be copy and pasted into a Java 2D array
-print("  private final int[][] LOOKUP_TABLE = {", end="")
-for key in final:
-    print(f"    {{ {final[key][0]}, {final[key][1]}, {final[key][2]} }},", end="")
-print("};", end="")
+# Write the data to a binary file
+with open("../lookupTable.bin", "wb") as file:
+    # Write the size of the lookup table
+    # file.write(struct.pack("I", TOTAL))  # Number of entries in the table
+
+    for key in range(TOTAL):
+        # Ensure we write exactly 8192 entries, filling any missing keys if necessary
+        p, s, closest = final.get(key, (1, 0, 0))
+        file.write(struct.pack(">iii", p, s, closest))    
+
+print("Lookup table successfully written to 'lookupTable.bin'")
