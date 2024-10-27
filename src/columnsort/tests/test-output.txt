@@ -1,0 +1,271 @@
+[H[2J[3JRunning tests/testcases/prog03a.dat
+Running tests/testcases/prog03b.dat
+Running tests/testcases/prog03b-positive-only.dat
+Running tests/testcases/prog03-simple-18-sequential.dat
+Running tests/testcases/prog03-simple-25.dat
+Running tests/testcases/prog03-simple-27.dat
+Running tests/testcases/prog03-simple-27-presorted.dat
+ROWS: 9, COLS: 3, OVERFLOW: 0
+Elapsed time = 0.006124988 seconds.
+1
+2
+ERROR IN SORT! Wrong placed element printed below
+---------------
+Running tests/testcases/prog03-simple-27-spec.dat
+Running tests/testcases/prog03-simple-30.dat
+Running tests/testcases/prog03-simple-31.dat
+Running tests/testcases/prog03-simple-54.dat
+ROWS: 18, COLS: 3, OVERFLOW: 0
+Elapsed time = 0.005784185 seconds.
+1
+2
+ERROR IN SORT! Wrong placed element printed below
+---------------
+Running tests/testcases/prog03-simple-54-presorted.dat
+ROWS: 18, COLS: 3, OVERFLOW: 0
+Elapsed time = 0.005760881 seconds.
+1
+2
+ERROR IN SORT! Wrong placed element printed below
+---------------
+Running tests/testcases/prog03-very-simple.dat
+Running tests/testcases/test_big.dat
+Running tests/testcases/testcase_100.dat
+Running tests/testcases/testcase_101.dat
+Running tests/testcases/testcase_102.dat
+Running tests/testcases/testcase_103.dat
+Running tests/testcases/testcase_104.dat
+Running tests/testcases/testcase_105.dat
+Running tests/testcases/testcase_106.dat
+Running tests/testcases/testcase_107.dat
+Running tests/testcases/testcase_108.dat
+Running tests/testcases/testcase_109.dat
+Running tests/testcases/testcase_10.dat
+Running tests/testcases/testcase_110.dat
+Running tests/testcases/testcase_111.dat
+Running tests/testcases/testcase_112.dat
+Running tests/testcases/testcase_113.dat
+Running tests/testcases/testcase_114.dat
+Running tests/testcases/testcase_115.dat
+Running tests/testcases/testcase_116.dat
+Running tests/testcases/testcase_117.dat
+Running tests/testcases/testcase_118.dat
+Running tests/testcases/testcase_119.dat
+Running tests/testcases/testcase_11.dat
+Running tests/testcases/testcase_120.dat
+Running tests/testcases/testcase_121.dat
+Running tests/testcases/testcase_122.dat
+Running tests/testcases/testcase_123.dat
+ROWS: 15, COLS: 3, OVERFLOW: 2
+Elapsed time = 0.007234974 seconds.
+0
+0
+ERROR IN SORT! Wrong placed element printed below
+---------------
+Running tests/testcases/testcase_124.dat
+Running tests/testcases/testcase_125.dat
+Running tests/testcases/testcase_126.dat
+Running tests/testcases/testcase_127.dat
+Running tests/testcases/testcase_128.dat
+Running tests/testcases/testcase_129.dat
+Running tests/testcases/testcase_12.dat
+Running tests/testcases/testcase_130.dat
+Running tests/testcases/testcase_131.dat
+Running tests/testcases/testcase_132.dat
+Running tests/testcases/testcase_133.dat
+Running tests/testcases/testcase_134.dat
+Running tests/testcases/testcase_135.dat
+Running tests/testcases/testcase_136.dat
+Running tests/testcases/testcase_137.dat
+Running tests/testcases/testcase_138.dat
+Running tests/testcases/testcase_139.dat
+Running tests/testcases/testcase_13.dat
+ROWS: 45, COLS: 5, OVERFLOW: 2
+Elapsed time = 0.005924632 seconds.
+-32
+-32
+ERROR IN SORT! Wrong placed element printed below
+---------------
+Running tests/testcases/testcase_140.dat
+Running tests/testcases/testcase_141.dat
+Running tests/testcases/testcase_142.dat
+Running tests/testcases/testcase_143.dat
+Running tests/testcases/testcase_144.dat
+Running tests/testcases/testcase_145.dat
+Running tests/testcases/testcase_146.dat
+Running tests/testcases/testcase_147.dat
+Running tests/testcases/testcase_148.dat
+Running tests/testcases/testcase_149.dat
+Running tests/testcases/testcase_14.dat
+Running tests/testcases/testcase_150.dat
+Running tests/testcases/testcase_151.dat
+Running tests/testcases/testcase_152.dat
+Running tests/testcases/testcase_153.dat
+Running tests/testcases/testcase_154.dat
+Running tests/testcases/testcase_155.dat
+Running tests/testcases/testcase_156.dat
+ROWS: 20, COLS: 4, OVERFLOW: 0
+Elapsed time = 0.005871463 seconds.
+0
+0
+ERROR IN SORT! Wrong placed element printed below
+---------------
+Running tests/testcases/testcase_157.dat
+Running tests/testcases/testcase_158.dat
+Running tests/testcases/testcase_159.dat
+Running tests/testcases/testcase_15.dat
+Running tests/testcases/testcase_160.dat
+Running tests/testcases/testcase_161.dat
+Running tests/testcases/testcase_162.dat
+Running tests/testcases/testcase_163.dat
+Running tests/testcases/testcase_164.dat
+Running tests/testcases/testcase_165.dat
+Running tests/testcases/testcase_166.dat
+Running tests/testcases/testcase_167.dat
+Running tests/testcases/testcase_168.dat
+Running tests/testcases/testcase_169.dat
+Running tests/testcases/testcase_16.dat
+Running tests/testcases/testcase_170.dat
+Running tests/testcases/testcase_171.dat
+Running tests/testcases/testcase_172.dat
+ROWS: 24, COLS: 4, OVERFLOW: 0
+Elapsed time = 0.005810633 seconds.
+0
+0
+ERROR IN SORT! Wrong placed element printed below
+---------------
+Running tests/testcases/testcase_173.dat
+Running tests/testcases/testcase_174.dat
+Running tests/testcases/testcase_175.dat
+Running tests/testcases/testcase_176.dat
+Running tests/testcases/testcase_177.dat
+Running tests/testcases/testcase_178.dat
+Running tests/testcases/testcase_179.dat
+Running tests/testcases/testcase_17.dat
+Running tests/testcases/testcase_180.dat
+Running tests/testcases/testcase_181.dat
+Running tests/testcases/testcase_182.dat
+Running tests/testcases/testcase_183.dat
+Running tests/testcases/testcase_184.dat
+Running tests/testcases/testcase_185.dat
+Running tests/testcases/testcase_186.dat
+Running tests/testcases/testcase_187.dat
+Running tests/testcases/testcase_188.dat
+ROWS: 28, COLS: 4, OVERFLOW: 0
+Elapsed time = 0.005918717 seconds.
+0
+0
+ERROR IN SORT! Wrong placed element printed below
+---------------
+Running tests/testcases/testcase_189.dat
+Running tests/testcases/testcase_18.dat
+Running tests/testcases/testcase_190.dat
+Running tests/testcases/testcase_191.dat
+Running tests/testcases/testcase_192.dat
+Running tests/testcases/testcase_193.dat
+Running tests/testcases/testcase_194.dat
+Running tests/testcases/testcase_195.dat
+Running tests/testcases/testcase_196.dat
+Running tests/testcases/testcase_197.dat
+Running tests/testcases/testcase_198.dat
+Running tests/testcases/testcase_199.dat
+Running tests/testcases/testcase_19.dat
+Running tests/testcases/testcase_1.dat
+Running tests/testcases/testcase_200.dat
+Running tests/testcases/testcase_201.dat
+Running tests/testcases/testcase_202.dat
+Running tests/testcases/testcase_203.dat
+Running tests/testcases/testcase_20.dat
+Running tests/testcases/testcase_21.dat
+Running tests/testcases/testcase_22.dat
+Running tests/testcases/testcase_23.dat
+Running tests/testcases/testcase_24.dat
+Running tests/testcases/testcase_25.dat
+Running tests/testcases/testcase_26.dat
+Running tests/testcases/testcase_27.dat
+Running tests/testcases/testcase_28.dat
+Running tests/testcases/testcase_29.dat
+Running tests/testcases/testcase_2.dat
+Running tests/testcases/testcase_30.dat
+Running tests/testcases/testcase_31.dat
+Running tests/testcases/testcase_32.dat
+Running tests/testcases/testcase_33.dat
+Running tests/testcases/testcase_34.dat
+Running tests/testcases/testcase_35.dat
+Running tests/testcases/testcase_36.dat
+Running tests/testcases/testcase_37.dat
+Running tests/testcases/testcase_38.dat
+Running tests/testcases/testcase_39.dat
+Running tests/testcases/testcase_3.dat
+Running tests/testcases/testcase_40.dat
+Running tests/testcases/testcase_41.dat
+Running tests/testcases/testcase_42.dat
+Running tests/testcases/testcase_43.dat
+Running tests/testcases/testcase_44.dat
+Running tests/testcases/testcase_45.dat
+Running tests/testcases/testcase_46.dat
+Running tests/testcases/testcase_47.dat
+Running tests/testcases/testcase_48.dat
+Running tests/testcases/testcase_49.dat
+Running tests/testcases/testcase_4.dat
+Running tests/testcases/testcase_50.dat
+Running tests/testcases/testcase_51.dat
+Running tests/testcases/testcase_52.dat
+Running tests/testcases/testcase_53.dat
+Running tests/testcases/testcase_54.dat
+Running tests/testcases/testcase_55.dat
+Running tests/testcases/testcase_56.dat
+Running tests/testcases/testcase_57.dat
+Running tests/testcases/testcase_58.dat
+Running tests/testcases/testcase_59.dat
+Running tests/testcases/testcase_5.dat
+Running tests/testcases/testcase_60.dat
+Running tests/testcases/testcase_61.dat
+Running tests/testcases/testcase_62.dat
+Running tests/testcases/testcase_63.dat
+Running tests/testcases/testcase_64.dat
+Running tests/testcases/testcase_65.dat
+Running tests/testcases/testcase_66.dat
+Running tests/testcases/testcase_67.dat
+Running tests/testcases/testcase_67-problematic_count.dat
+Running tests/testcases/testcase_68.dat
+Running tests/testcases/testcase_68-problematic_count.dat
+Running tests/testcases/testcase_69.dat
+Running tests/testcases/testcase_6.dat
+Running tests/testcases/testcase_70.dat
+Running tests/testcases/testcase_71.dat
+Running tests/testcases/testcase_72.dat
+Running tests/testcases/testcase_73.dat
+Running tests/testcases/testcase_74.dat
+Running tests/testcases/testcase_75.dat
+Running tests/testcases/testcase_76.dat
+Running tests/testcases/testcase_77.dat
+Running tests/testcases/testcase_78.dat
+Running tests/testcases/testcase_78-duplicates.dat
+Running tests/testcases/testcase_79.dat
+Running tests/testcases/testcase_79-duplicates.dat
+Running tests/testcases/testcase_7.dat
+Running tests/testcases/testcase_80.dat
+Running tests/testcases/testcase_81.dat
+Running tests/testcases/testcase_82.dat
+Running tests/testcases/testcase_83.dat
+Running tests/testcases/testcase_84.dat
+Running tests/testcases/testcase_85.dat
+Running tests/testcases/testcase_86.dat
+Running tests/testcases/testcase_87.dat
+Running tests/testcases/testcase_88.dat
+Running tests/testcases/testcase_89.dat
+Running tests/testcases/testcase_8.dat
+Running tests/testcases/testcase_90.dat
+Running tests/testcases/testcase_91.dat
+Running tests/testcases/testcase_92.dat
+Running tests/testcases/testcase_93.dat
+Running tests/testcases/testcase_94.dat
+Running tests/testcases/testcase_95.dat
+Running tests/testcases/testcase_96.dat
+Running tests/testcases/testcase_97.dat
+Running tests/testcases/testcase_98.dat
+Running tests/testcases/testcase_99.dat
+Running tests/testcases/testcase_9.dat
+Running tests/testcases/test_large_prime_number_of_ints.dat
+Running tests/testcases/test_medium.dat

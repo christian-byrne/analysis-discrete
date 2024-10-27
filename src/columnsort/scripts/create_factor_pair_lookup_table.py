@@ -24,7 +24,8 @@ def find_factors_pairs(n):
     return result
 
 
-TOTAL = 65536
+# TOTAL = 65536
+TOTAL = 32768
 x = find_factors_pairs(TOTAL)
 
 final = {
@@ -67,3 +68,4 @@ with open("../lookupTable.bin", "wb") as file:
         file.write(struct.pack(">iii", p, s, closest))    
 
 print("Lookup table successfully written to 'lookupTable.bin'")
+
