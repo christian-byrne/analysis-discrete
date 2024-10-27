@@ -1,4 +1,0 @@
-n = 244
-r = 122
-s = 2
-Elapsed time = 7.35022E-4 seconds.

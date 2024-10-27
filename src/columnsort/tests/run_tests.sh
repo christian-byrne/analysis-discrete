@@ -12,7 +12,7 @@ javac Prog3.java
 
 for test in "tests/testcases/"*.dat;
 do
-  echo "Running $test"
+  # echo "Running $test"
   # Always print the test file being run
   if ! $PRINT_ONLY_FAILURES; then
     echo "Running $test"
@@ -44,6 +44,7 @@ do
     fi
   else
     # Failed sort - Always print error details regardless of the flag
+    echo "Failed test: $test"
     head -n 4 output.txt
     echo "ERROR IN SORT! Wrong placed element printed below"
     sort -nc sort.txt  # Print the first out-of-place element
