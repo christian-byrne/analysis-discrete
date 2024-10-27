@@ -12,6 +12,10 @@ buildNumber.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 
+**/Prog3.java.benchmark
+**/Prog3_combined_with_merge.java
+times-record.md
+
 allure-results/
 .vscode/
 .idea/
@@ -47,3 +51,5 @@ allure-results/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+**/*testcase_*.dat
