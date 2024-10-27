@@ -1,4 +1,3 @@
-tests_dir=./testcases
 
 # clear the terminal so testcase output is clear
 clear
@@ -7,7 +6,7 @@ cd ..
 
 javac Prog3.java
 
-for test in "$tests_dir"/*
+for test in "tests/testcases/"*.dat;
 do
   echo "Running $test"
   java Prog3 $test > output.txt
