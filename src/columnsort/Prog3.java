@@ -4,25 +4,22 @@
  * DATE: 2021-10-27
  * FILE: Prog3.java
  * DESC: A Java program that implements the columnsort algorithm to sort an array. The
- * algorithm requires the input array to be reshaped into a matrix with a specified number
- * of rows and columns. The matrix is then sorted column-wise using an in-place insertion
- * sort algorithm on doubly circular linked lists. After sorting, the matrix is reshaped
- * back into a single array. The algorithm also sorts the tail overflow partition of the
- * original array separately.
+ *       algorithm requires the input array to be reshaped into a matrix with a specified number
+ *       of rows and columns. The matrix is then sorted column-wise using an in-place insertion
+ *       sort algorithm on doubly circular linked lists. After sorting, the matrix is reshaped
+ *       back into a single array. The algorithm also sorts the tail overflow partition of the
+ *       original array separately.
  * KNOWN ISSUES: None
  * COMPILATION: javac Prog3.java
  * EXECUTION: java Prog3 <filename>
  * USAGE: Replace <filename> with the path to the file containing the array to be sorted. The
- * file should contain one integer per line.
+ *        file should contain one integer per line.
  * EXAMPLE: java Prog3 data.txt
  */
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.Optional;
 import java.io.IOException;
-
-import java.util.Arrays;
-import java.util.HashMap;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.nio.file.Files;
@@ -33,11 +30,13 @@ import java.nio.file.Paths;
  * The algorithm sorts an array using the columnsort algorithm, which requires
  * the input array to be reshaped into a matrix with a specified number of rows
  * and columns.
+ * 
  * The matrix is then sorted column-wise using an in-place insertion sort
  * algorithm on doubly circular linked lists.
  * After sorting, the matrix is reshaped back into a single array.
  * The algorithm also sorts the tail overflow partition of the original array
  * separately.
+ * 
  * Prerequisites for Columnsort:
  * 1. data arranged in p x q matrix
  * 2. rows p atleast 2 times size of q
@@ -98,12 +97,10 @@ public class Prog3 {
    * Sorts an array using the columnsort algorithm.
    * 
    * The algorithm requires the input array to be reshaped into a matrix with a
-   * specified number of rows and columns.
-   * The matrix is then sorted column-wise using an in-place insertion sort
-   * algorithm on doubly circular linked lists.
-   * After sorting, the matrix is reshaped back into a single array.
-   * The algorithm also sorts the tail overflow partition of the original array
-   * separately.
+   * specified number of rows and columns. The matrix is then sorted column-wise
+   * using an in-place insertion sort algorithm on doubly circular linked lists.
+   * After sorting, the matrix is reshaped back into a single array. The algorithm
+   * also sorts the tail overflow partition of the original array separately.
    */
   private static final void columnsort() {
     // If size of array is less than the minimum matrix size, use insertion sort
@@ -135,9 +132,8 @@ public class Prog3 {
 
   /**
    * Custom node class for the doubly circular linked list used in the columnsort
-   * algorithm.
-   * Each node contains an integer value and references to the next and previous
-   * nodes.
+   * algorithm. Each node contains an integer value and references to the next and
+   * previous nodes.
    */
   private static final class Node {
     int value;
@@ -266,11 +262,9 @@ public class Prog3 {
 
   /**
    * Creates a matrix represented as an ArrayList of DCLinkedList objects from a
-   * given array.
-   * The matrix is constructed with a specified number of columns (COLS) and rows
-   * (ROWS).
-   * Each column is filled with elements from the input array in a column-major
-   * order.
+   * given array. The matrix is constructed with a specified number of columns
+   * (COLS) and rows (ROWS). Each column is filled with elements from the input
+   * array in a column-major order.
    *
    * @param array the input array from which the matrix is created
    * @return an ArrayList of DCLinkedList objects representing the matrix
@@ -309,14 +303,10 @@ public class Prog3 {
 
   /**
    * Transposes and reshapes the given matrix represented as an ArrayList of
-   * DCLinkedList.
-   * The method iterates through the columns and rows of the matrix, adjusting the
-   * elements
-   * by popping and prepending values from the linked lists.
-   * 
-   * The end result is as if the matrix was transposed and then reshaped so every
-   * two columns
-   * were concatenated.
+   * DCLinkedList. The method iterates through the columns and rows of the matrix,
+   * adjusting the elements by popping and prepending values from the linked
+   * lists. The end result is as if the matrix was transposed and then reshaped so
+   * every two columns were concatenated.
    *
    * @param matrix the matrix to be transposed and reshaped, represented as an
    *               ArrayList of DCLinkedList
@@ -332,10 +322,8 @@ public class Prog3 {
 
   /**
    * Reshapes and transposes the given matrix represented as an ArrayList of
-   * DCLinkedList.
-   * The method iterates through the columns and rows of the matrix, adjusting the
-   * elements
-   * by appending and popping values from the linked lists.
+   * DCLinkedList. The method iterates through the columns and rows of the matrix,
+   * adjusting the elements by appending and popping values from the linked lists.
    * 
    * The end result is as if the matrix was reshaped so every two rows were
    * concatenated and then the matrix was transposed.
@@ -355,11 +343,9 @@ public class Prog3 {
 
   /**
    * Sorts the columns of a matrix represented as an ArrayList of DCLinkedList
-   * objects.
-   * Each DCLinkedList represents a column in the matrix, and each column is
-   * sorted in ascending order.
-   * The sorting is performed using an in-place insertion sort algorithm on the
-   * doubly circular linked list.
+   * objects. Each DCLinkedList represents a column in the matrix, and each column
+   * is sorted in ascending order. The sorting is performed using an in-place
+   * insertion sort algorithm on the doubly circular linked list.
    *
    * @param matrix An ArrayList of DCLinkedList objects, where each DCLinkedList
    *               represents a column in the matrix.
@@ -466,8 +452,8 @@ public class Prog3 {
     int shift = (rows / 2) - 1;
     int originalColCt = matrix.size();
 
-    // For n-1 first cols, pop `shift` values from the end and prepend to the
-    // next col
+    // For first n - 1 cols, pop `shift` values from the end and prepend to the
+    // start of the next col
     for (int i = originalColCt - 1; i > 0; i--) {
       DCLinkedList row = matrix.get(i);
       for (int j = 0; j < shift; j++) {
@@ -475,7 +461,7 @@ public class Prog3 {
       }
     }
 
-    // Remove the `shift` Infinity pad values from the last col
+    // Remove the `shift` number of pad values from the last col
     for (int i = 0; i < shift; i++) {
       matrix.get(0).popRight();
     }
@@ -487,16 +473,13 @@ public class Prog3 {
    * into the array, handling overflow elements from the array.
    *
    * This method assumes that the last column of the matrix contains negative
-   * infinity values
-   * and starts merging from the second-to-last column. It compares elements from
-   * the current
-   * column of the matrix and the overflow elements from the array, placing the
-   * smaller element
-   * into the array. If a column in the matrix is exhausted, it moves to the
-   * previous column.
-   * If the overflow elements in the array are exhausted, it continues with the
-   * remaining elements
-   * from the matrix.
+   * infinity values and starts merging from the second-to-last column. It
+   * compares elements from the current column of the matrix and the overflow
+   * elements from the array, placing the smaller element into the array.
+   * 
+   * If a column in the matrix is exhausted, it moves to the previous column. If
+   * the overflow elements in the array are exhausted, it continues with the
+   * remaining elements from the matrix.
    *
    * @param array  the array containing overflow elements to be merged
    * @param matrix the matrix of doubly circular linked lists to be merged
