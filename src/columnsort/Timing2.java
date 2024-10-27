@@ -24,34 +24,35 @@ import java.io.*;
 
 public class Timing2 {
 
-    public static void main (String [] args) {
+    public static void main(String[] args) {
 
         final double BILLION = 1000000000.0; // a nanosec = billionth of a sec
 
-        long   startTime,     // the system time before the execution of the
-                              //     algorithm being measured, in nanoseconds
-               elapsedTime;   // the time required to execute the algorithm,
-                              //     in nanoseconds
-        double seconds;       // the time required to execute the algorithm,
-                              //     in seconds
+        long startTime, // the system time before the execution of the
+                        // algorithm being measured, in nanoseconds
+                elapsedTime; // the time required to execute the algorithm,
+                             // in nanoseconds
+        double seconds; // the time required to execute the algorithm,
+                        // in seconds
 
-        System.gc();  // Just to suggest that we'd appreciate getting any
-                      // garbage collection activities out of the way
-                      // before the time-critical code is executed.
+        System.gc(); // Just to suggest that we'd appreciate getting any
+                     // garbage collection activities out of the way
+                     // before the time-critical code is executed.
 
         startTime = System.nanoTime();
 
         for (int i = 1; i <= 500000; i++) {
             System.out.print(i + " ");
-            if (i%10 == 0) System.out.println();
+            if (i % 10 == 0)
+                System.out.println();
         }
 
         elapsedTime = System.nanoTime() - startTime;
-        seconds =  elapsedTime / BILLION;
+        seconds = elapsedTime / BILLION;
 
         System.out.print("\n\n");
         System.out.println(seconds + " seconds of execution time"
-                         + " were required to print a mess of integers.\n");
+                + " were required to print a mess of integers.\n");
 
     }
 }

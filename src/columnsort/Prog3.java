@@ -1,21 +1,28 @@
 
 /**
- * NAME: Christian Byrne
- * DATE: 2021-10-27
- * FILE: Prog3.java
- * DESC: A Java program that implements the columnsort algorithm to sort an array. The
+ * Author: Christian Byrne
+ * Course: CSc 345 — Analysis of Discrete Structures
+ * Assignment: Program #2: Bones Battle
+ * Instructor: McCann
+ * TAs: Rubin Yang, Lucas Almeida, Hamad Ayaz, Sohan Bhakta, CJ Chen, Hyungji Kim, Hamlet Taraz
+ * Due Date: October 17, 2024
+ * File: Prog3.java
+ * Desc: A Java program that implements the columnsort algorithm to sort an array. The
  *       algorithm requires the input array to be reshaped into a matrix with a specified number
  *       of rows and columns. The matrix is then sorted column-wise using an in-place insertion
  *       sort algorithm on doubly circular linked lists. After sorting, the matrix is reshaped
  *       back into a single array. The algorithm also sorts the tail overflow partition of the
  *       original array separately.
- * KNOWN ISSUES: None
- * COMPILATION: javac Prog3.java
- * EXECUTION: java Prog3 <filename>
- * USAGE: Replace <filename> with the path to the file containing the array to be sorted. The
+ * Known Issues: None
+ * Compilation: javac Prog3.java
+ * Execution: java Prog3 <filename>
+ * Usage: Replace <filename> with the path to the file containing the array to be sorted. The
  *        file should contain one integer per line.
- * EXAMPLE: java Prog3 data.txt
+ * Example: java Prog3 data.txt
+ * Features Not Implemented: Parallelized sorting of the columns
+ * 
  */
+
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.Optional;
@@ -43,6 +50,7 @@ import java.nio.file.Paths;
  * 3. p is even
  * 4. a comparison-based sorting algorithm is used for sorting rows/cols
  * 
+ * @depdendencies None
  * @see <a href="https://en.wikipedia.org/wiki/Columnsort">Columnsort -
  *      Wikipedia</a>
  * @author Chrstian Byrne
@@ -63,33 +71,37 @@ public class Prog3 {
   private static final int MIN_MATRIX_SIZE = 8;
 
   /** Total number of entries in the lookup table */
-  private static final int TOTAL_ENTRIES = 65536;
+  private static final int TOTAL_ENTRIES = 16384;
 
   public static void main(String[] args) {
     // Read the input file and parse the data
     String filename = args[0];
     arr = parseDataFile(filename).orElseThrow(RuntimeException::new);
+    int[][] lut = loadLookupTable("lookupTable.bin");
+
+    /* ------------------------------ TIMED SECTION ----------------------------- */
+    double startTime = System.nanoTime();
 
     // Get the r and s values from the lookup table
-    int[][] lut = loadLookupTable("lookupTable.bin");
     size = arr.length;
     rows = lut[size][0];
     cols = lut[size][1];
     remainder = lut[size][2];
-    System.out.println("n = " + size + "\nr = " + rows + "\ns = " + cols);
 
     // Sort the array using the columnsort algorithm and measure the elapsed time
-    double startTime = System.nanoTime();
     columnsort();
-    double endTime = System.nanoTime();
 
-    // Calculate and print the elapsed time
+    double endTime = System.nanoTime();
+    /* ---------------------------- END TIMED SECTION --------------------------- */
+
+    // Print the matrix size, dimensions, and elapsed time
+    System.out.println("n = " + size + "\nr = " + rows + "\ns = " + cols);
     String formattedTime = String.format("%.3f", (endTime - startTime) / 1_000_000_000.0);
     System.out.println("Elapsed time = " + formattedTime + " seconds.");
 
     // Print the sorted array
     for (int i = 0; i < arr.length; i++) {
-      // System.out.println(arr[i]);
+      System.out.println(arr[i]);
     }
   }
 
