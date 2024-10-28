@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Author: Christian Byrne
  * Course: CSc 345 — Analysis of Discrete Structures
@@ -55,7 +57,7 @@ import java.nio.file.Paths;
  * @author Chrstian Byrne
  * @date 2021-10-27
  */
-public class Prog3 {
+public class Prog3Testing {
   private static int rows;
   private static int cols;
   private static int size;
@@ -88,19 +90,25 @@ public class Prog3 {
     remainder = size < TOTAL_ENTRIES ? lut[size][2] : size - TOTAL_ENTRIES;
 
     // Sort the array using the columnsort algorithm and measure the elapsed time
-    columnsort();
+    double time = SortingAlgs.getAverageTime(arr, Prog3::columnsort);
+    // columnsort();
 
     double endTime = System.nanoTime();
     /* ---------------------------- END TIMED SECTION --------------------------- */
 
+    HashMap<String, Double> benchmarks = SortingAlgs.benchmarkAlgs(arr);
     // Print the matrix size, dimensions, and elapsed time
     System.out.println("n = " + size + "\nr = " + rows + "\ns = " + cols);
     String formattedTime = String.format("%.3f", (endTime - startTime) / 1_000_000_000.0);
     System.out.println("Elapsed time = " + formattedTime + " seconds.");
 
+    // benchmarks.put("columnsort", (endTime - startTime) / 1_000_000.0);
+    benchmarks.put("columnsort", time);
+    SortingAlgs.printTableResults(benchmarks);
+
     // Print the sorted array
     for (int i = 0; i < arr.length; i++) {
-      System.out.println(arr[i]);
+      // System.out.println(arr[i]);
     }
   }
 
@@ -113,7 +121,7 @@ public class Prog3 {
    * After sorting, the matrix is reshaped back into a single array. The algorithm
    * also sorts the tail overflow partition of the original array separately.
    */
-  private static final void columnsort() {
+  private static final void columnsort(int[] arr) {
     // If size of array is less than the minimum matrix size, use insertion sort
     if (size < MIN_MATRIX_SIZE) {
       insertionSort(arr, 0);
@@ -135,7 +143,8 @@ public class Prog3 {
     sortColumns(matrix);
 
     // Sort the tail overflow of original array
-    insertionSort(arr, size - remainder);
+    // insertionSort(arr, size - remainder);
+    quickSortWithSelectionSort(arr, size - remainder, size - 1);
 
     // Merge the matrix cols with the sorted overflow partition
     mergeWithOverflow(arr, matrix);
@@ -476,6 +485,59 @@ public class Prog3 {
     for (int i = 0; i < shift; i++) {
       matrix.get(0).popRight();
     }
+  }
+
+  private static final int INSERTION_SORT_THRESHOLD = 32;
+
+  public static void quickSortWithSelectionSort(int[] array, int low, int high) {
+    if (low < high) {
+      if (high - low < INSERTION_SORT_THRESHOLD) {
+        selectionSort(array);
+      } else {
+        int pi = partition(array, low, high);
+        quickSort(array, low, pi - 1);
+        quickSort(array, pi + 1, high);
+      }
+    }
+  }
+
+  private static void selectionSort(int[] array) {
+    for (int i = 0; i < array.length - 1; i++) {
+      int minIndex = i;
+      for (int j = i + 1; j < array.length; j++) {
+        if (array[j] < array[minIndex]) {
+          minIndex = j;
+        }
+      }
+      int temp = array[minIndex];
+      array[minIndex] = array[i];
+      array[i] = temp;
+    }
+  }
+
+  private static void quickSort(int[] array, int low, int high) {
+    if (low < high) {
+      int pi = partition(array, low, high);
+      quickSort(array, low, pi - 1);
+      quickSort(array, pi + 1, high);
+    }
+  }
+
+  private static int partition(int[] array, int low, int high) {
+    int pivot = array[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++) {
+      if (array[j] < pivot) {
+        i++;
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    }
+    int temp = array[i + 1];
+    array[i + 1] = array[high];
+    array[high] = temp;
+    return i + 1;
   }
 
   /**

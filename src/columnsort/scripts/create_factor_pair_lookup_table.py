@@ -12,10 +12,12 @@ def find_factors_pairs(n):
         filtered_factors = [
             (p, s) for p, s in factors 
             if p >= 2 * (s - 1) ** 2 and p % s == 0
+            # if p >= 2 * (s - 1) ** 2 and p % s == 0 and s >= 2
         ]
         
         # Sort by the first element (p) in ascending order
         filtered_factors.sort(key=lambda x: x[0])
+        # filtered_factors.sort(key=lambda x: x[1])
         
         # Select the first pair if available and add to result dictionary
         if filtered_factors:
@@ -25,7 +27,9 @@ def find_factors_pairs(n):
 
 
 # TOTAL = 65536
-TOTAL = 16384
+# TOTAL = 16384
+# TOTAL = 2048
+TOTAL = 64
 x = find_factors_pairs(TOTAL)
 
 final = {
