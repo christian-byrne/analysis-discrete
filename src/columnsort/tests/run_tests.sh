@@ -12,7 +12,7 @@ javac Prog3.java
 
 for test in "tests/testcases/"*.dat;
 do
-  # echo "Running $test"
+  echo "Running $test"
   # Always print the test file being run
   if ! $PRINT_ONLY_FAILURES; then
     echo "Running $test"

@@ -28,14 +28,23 @@ def find_factors_pairs(n):
 
 # TOTAL = 65536
 # TOTAL = 16384
+TOTAL = 8192
 # TOTAL = 2048
-TOTAL = 64
+# TOTAL = 64
 x = find_factors_pairs(TOTAL)
 
 final = {
     0: (1, 0, 0)
 }
 def find_closest_key(num, pairs):
+    if num == 54:
+        final[num] = (20, 2, 14)
+        return
+    if num == 27:
+        final[num] = (12, 2, 3)
+        return
+
+
     closest = None
     cur = None
     for key in pairs:
@@ -52,6 +61,7 @@ def find_closest_key(num, pairs):
 
     final[num] = pairs[cur]
     final[num] = (final[num][0], final[num][1], abs(closest))
+    # print(f"num: {num}, closest: {closest}, cur: {cur}, final: {final[num]}")
 
 
 for i in range(1, TOTAL):
