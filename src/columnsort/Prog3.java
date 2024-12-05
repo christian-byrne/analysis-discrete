@@ -408,9 +408,9 @@ public class Prog3 {
     System.out.println("Elapsed time = " + formattedTime + " seconds.");
 
     // Print the sorted array
-    for (int i = 0; i < arr.length; i++) {
-      System.out.println(arr[i]);
-    }
+    // for (int i = 0; i < arr.length; i++) {
+    // System.out.println(arr[i]);
+    // }
   }
 
   /**
@@ -556,6 +556,9 @@ public class Prog3 {
     rows = size < MAX_ENTRIES ? lut[size][0] : lut[MAX_ENTRIES - 1][0];
     cols = size < MAX_ENTRIES ? lut[size][1] : lut[MAX_ENTRIES - 1][1];
     remainder = size < MAX_ENTRIES ? lut[size][2] : size - MAX_ENTRIES;
+    // rows = 20000;
+    // cols = 50;
+    // remainder = 0;
   }
 
   /**

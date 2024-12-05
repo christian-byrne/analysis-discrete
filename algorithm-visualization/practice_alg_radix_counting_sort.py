@@ -1,0 +1,29 @@
+
+from collections import deque
+def radix_sort(inp):
+    if not inp:
+        return inp
+    max_num = max(inp)
+    exp = 1
+    while max_num/exp > 0:
+        counting_sort(inp, exp)
+        exp *= 10
+    return inp
+
+def counting_sort(inp, exp):
+    n = len(inp)
+    output = [0]*n
+    count = [0]*10
+    for i in range(n):
+        index = inp[i]//exp
+        count[index%10] += 1
+    for i in range(1, 10):
+        count[i] += count[i-1]
+    i = n-1
+    while i >= 0:
+        index = inp[i]//exp
+        output[count[index%10]-1] = inp[i]
+        count[index%10] -= 1
+        i -= 1
+    for i in range(n):
+        inp[i] = output[i]
