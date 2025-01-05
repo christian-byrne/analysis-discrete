@@ -175,8 +175,8 @@ def expected_value_cache_hit(
     return results
 
 
-param_spaces = [16, 32, 64, 128, 512, 2049, 65536]
-n_call_space = [8, 32, 128, 2048, 32768]
+param_spaces = [16, 32, 64, 128, 512, 2049, 65536, 129240]
+n_call_space = [8, 32, 128, 300, 2048, 32768, 64 * 1024]
 rows = []
 
 from itertools import product
