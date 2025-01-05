@@ -1,3 +1,0 @@
-Splay https://www.cs.usfca.edu/~galles/visualization/SplayTree.html
-AVL https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
-B-Tree https://www.cs.usfca.edu/~galles/visualization/BTree.html
